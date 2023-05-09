@@ -8,7 +8,8 @@ def main():
         password="Ounissi69800", 
         user="chemsdine",
         host="myserverchems.mysql.database.azure.com",
-        bdd_name="linkedin_bdd"
+        bdd_name="linkedin_bdd",
+        table_name="tesdddt"
     )
     
 main()
