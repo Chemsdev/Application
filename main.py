@@ -5,10 +5,10 @@ def main():
     
     # Création de la base de données et la table.
     create_bdd_and_table(
-        table_name="test", 
-        bdd_name="linkedin", 
-        password="", 
-        user="root"
+        password="Ounissi69800", 
+        user="chemsdine",
+        host="myserverchems.mysql.database.azure.com",
+        bdd_name="linkedin_bdd"
     )
     
 main()
