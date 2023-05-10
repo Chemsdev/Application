@@ -5,7 +5,7 @@ from functions import send_data_to_api, get_data_from_api, background, css_page
 def main():
     
     # ======================= FRONT =========================== #
-    background(url="https://wallpapercave.com/wp/wp9165367.jpg")
+    background(url="https://img.freepik.com/premium-photo/male-hands-typing-laptop-using-smartphone-abstract-dark-black-office-desk_232693-407.jpg?w=1060")
     css_page()
     
     # ===================== FORMULAIRE ======================== #
