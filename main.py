@@ -6,16 +6,15 @@ from functions import send_data_to_api, create_tables, traitement_formualaire, b
 
 def main():
     
-    # ======================== SQL ============================ #
-    background_front(url="https://images.hdqwalls.com/download/fox-logo-minimalism-ph-2048x1152.jpg")
+    # ======================= FRONT =========================== #
+    background_front(url="https://wallpapercave.com/wp/wp3460663.jpg")
     
-
     # ======================== SQL ============================ #
     create_tables(table_name_1="features", table_name_2="predictions")
     
     # ===================== FORMULAIRE ======================== #
     submitted, data = traitement_formualaire()
-        
+    
     if submitted:
         send_data_to_api(data)
     
