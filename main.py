@@ -13,7 +13,6 @@ def main():
     submitted, data = traitement_formualaire()
         
     if submitted:
-        st.write(data)
         send_data_to_api(data)
     
 main()
