@@ -12,7 +12,7 @@ def data():
     
     
     # ========================== PAGE ================================>
-    background_front(url="https://rare-gallery.com/uploads/posts/352939-4k-wallpaper.jpg")
+    background_front(url="https://images.hdqwalls.com/download/fox-logo-minimalism-ph-2048x1152.jpg")
     st.title("Consultation des données")
     st.markdown("Les données")
     st.write(data)  
