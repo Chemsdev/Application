@@ -2,8 +2,6 @@ import streamlit as st
 from functions import background_front, get_data_from_api, columns_DataFrame, delete_data_via_api
 
 
-
-
 def data():
          
     # ========================== API SQL ===============================>

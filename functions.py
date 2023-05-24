@@ -29,9 +29,12 @@ cursor = cnx.cursor()
 def create_tables(table_name_1:str, table_name_2:str, connexion=cnx, cursor=cursor):
     cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name_1}
     (id INT AUTO_INCREMENT PRIMARY KEY,
-    feature_1 TEXT,
-    feature_2 TEXT,
-    feature_3 TEXT)
+    schedule_type TEXT,
+    search_term TEXT,
+    search_location TEXT,
+    description_tokens TEXT,
+    YEAR  INTEGER,
+    MONTH INTEGER)
     ''')
     print(f"Table '{table_name_1}' créée avec succès.")    
     cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name_2}
@@ -110,15 +113,13 @@ def css_page_front():
     </style>
     """, unsafe_allow_html=True)
 
-# =======================================================================================================================================>
-
 # fonction permettent de créer l'encart pour afficher la prédiction.
 def encart_prediction(color:str, predict:str):
     st.markdown("")
     box_style = f"""
         padding: 20px;
-        width: 230px;
-        height: 80px;
+        width: 40px;
+        height: 40px;
         border: 2px solid {color};
         border-radius: 5px
     """
@@ -131,7 +132,7 @@ def encart_prediction(color:str, predict:str):
 
     st.markdown(
         f'<div style="{box_style}">'
-        f'<p style="{text_style}">Votre vol est {predict} !</p>'
+        f'<p style="{text_style}">{predict} !</p>'
         f'</div>',
         unsafe_allow_html=True
     )
@@ -140,7 +141,7 @@ def encart_prediction(color:str, predict:str):
 
 # Fonction permettent de mettre les noms de colonnes aux DataFrames et faire un merge.
 def columns_DataFrame(data1, data2):
-    columns_features=['id','feature_1', 'feature_2', 'feature_3']
+    columns_features=["id", "schedule_type", "search_term", "search_location", "description_tokens", "YEAR", "MONTH"]
     columns_prediction=["id","id_fk","y_pred"]
     features   = pd.DataFrame(data1, columns=columns_features)
     prediction = pd.DataFrame(data2, columns=columns_prediction)
@@ -152,14 +153,21 @@ def columns_DataFrame(data1, data2):
 
 # Fonction permettent de créer le formulaire.
 def traitement_formualaire():
-    st.write("Veuillez remplir le formulaire")
+    col1, col2 = st.columns(2)
     with st.form(f"formulaire"):
-        data = {
-            "feature_1" : st.text_input(f'Veuillez saisir la feature 1',  key=1),                
-            "feature_2" : st.text_input(f'Veuillez saisir la feature 2',  key=2),        
-            "feature_3" : st.text_input(f'Veuillez saisir la feature 3',  key=3),   
-            "Prediction" :st.text_input(f'Veuillez saisir la prédiction', key=4),                       
-        }
-        submitted = st.form_submit_button("Envoyer")
+        with col1:
+            data = {
+                "schedule_type"   : st.selectbox(f'Type de contrat', options=['Full-time', 'Internship', 'Contractor', 'Part-time']),                
+                "search_term"     : st.selectbox(f"Type de job",  options=['data analyst']),        
+                "search_location" : st.selectbox(f'Localisation Travail',  options=['United States']),                                                      
+            }
+        with col2:
+            data2 = {
+                "description_tokens" : st.text_input(f'Soft-Skills', key=1),        
+                "YEAR"  : st.selectbox(f'Années', options=[2022, 2023]),     
+                "MONTH" : st.selectbox(f'Mois',   options=[i+1 for i in range(12)]),
+            }
+        submitted = st.form_submit_button("Envoyer")    
+    data.update(data2)
     return submitted, data
 
