@@ -8,11 +8,10 @@ def data():
          
     # ========================== API SQL ===============================>
     features, predictions = get_data_from_api()
-    data = columns_DataFrame(data1=features, data2=predictions)
-    
     
     # ========================== PAGE ================================>
     background_front(url="https://wallpapercave.com/wp/wp3460663.jpg")
+    data = columns_DataFrame(data1=features, data2=predictions)
     st.title("Consultation des données")
     st.markdown("Les données")
     st.write(data)  
