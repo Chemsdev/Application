@@ -22,6 +22,16 @@ def get_data_from_api(url="http://localhost:8000/data/get"):
         st.success("Données récupérées avec succès.")
         return data
     return st.error("Erreur lors de la récupération des données.")
+
+# =======================================================================>
+
+# Fonction pour supprimer les données via l'API.
+def delete_data_via_api(url):
+    response = requests.delete(url)
+    if response.status_code == 200:
+        print("Les données ont été supprimées avec succès.")
+    else:
+        print("Erreur lors de la suppression des données.")
     
 # =======================================================================>
 
