@@ -106,8 +106,8 @@ def css_page_front():
         }
         p {
             text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-            font-size:25px;
-            # text-shadow: 1px 1px 2px pink;
+            font-size:16px;
+            font-weight:bold;
         }
     </style>
     """, unsafe_allow_html=True)

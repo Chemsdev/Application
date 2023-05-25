@@ -13,7 +13,7 @@ def main():
     create_tables(table_name_1="features", table_name_2="predictions")
     
     # ===================== FORMULAIRE ======================== #
-    style_text(text="Trouver l'emploie de vos rêves")
+    style_text(text="Trouve l'emploie de tes rêves")
        
     st.markdown("")
     submitted, data = traitement_formulaire()
