@@ -38,10 +38,12 @@ def accueil():
     with col3:
         st.header("")
         read_picture(width=220, image="test", format="png")
+        
+    # =================  LES WorkClouds ================ #
     if st.button("Visualiser les WorkClouds"):
-        style_text(text="Mots clés d'une offre d'emploi")
+        st.header("Principaux Mots clés d'une offre d'emploi")
         read_picture(width=700, image="workcloud_1", format="png")
-        style_text(text="Outils du Data Analyst")
+        st.header("Principaux outils du Data Analyst")
         read_picture(width=700, image="workcloud_2", format="png")
         
 accueil()
