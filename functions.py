@@ -144,7 +144,8 @@ def traitement_formulaire():
                                                         'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'TypeScript', 
                                                         'Kotlin', 'Perl', 'Objective-C', 'Scala', 'Haskell', 
                                                         'Lua', 'Shell', 'HTML', 'CSS', 'SQL', 'Symfony', 'React', 
-                                                        "Laravel", "VueJS", "django", "Flask"
+                                                        "Laravel", "VueJS", "django", "Flask", "Excel", "Word", 
+                                                        "Tableau", "PowerBI", "Word", "PowerPoint"
                                                     ]),
                 "YEAR":  st.selectbox('Années', options=[2022, 2023]),     
                 "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),

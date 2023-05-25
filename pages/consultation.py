@@ -8,7 +8,7 @@ def data():
     features, predictions = get_data_from_api()
     
     # ========================== PAGE ================================>
-    background_front(url="https://wallpaperaccess.com/full/1704480.jpg")
+    background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
     data = columns_DataFrame(data1=features, data2=predictions)
     st.title("Consultation des données")
     st.write(data)  
