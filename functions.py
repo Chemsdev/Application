@@ -198,3 +198,5 @@ def traitement_formulaire():
 def read_picture(width:int, image:str, format:str):
     image = Image.open(f'images/{image}.{format}')
     return st.image(image, width=width)
+
+

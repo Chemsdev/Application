@@ -14,7 +14,6 @@ def rechercher():
     
     # ===================== FORMULAIRE ======================== #
     style_text(text="Trouve l'emploi de tes rêves")
-       
     st.markdown("")
     submitted, data = traitement_formulaire()
     if submitted:

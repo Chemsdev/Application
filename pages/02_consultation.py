@@ -12,7 +12,6 @@ def data():
     data = columns_DataFrame(data1=features, data2=predictions)
     style_text(text="Consultation de la Data")
     st.write(data)  
-    
     if st.button("Supprimer toutes les données"):
         delete_data_via_api()        
     

@@ -27,7 +27,7 @@ def main():
         Le poste idéal correspondant à leurs compétences et à leurs aspirations professionnelles.           
     """)
     
-    # =================== LES IMAGES =================== #
+    # =================== Les images =================== #
     col1, col2, col3 = st.columns(3)
     with col1:
         st.header("")
@@ -39,8 +39,8 @@ def main():
         st.header("")
         read_picture(width=220, image="test", format="png")
         
-    # =================  LES WorkClouds ================ #
-    if st.button("Visualiser les WorkClouds"):
+    # =================  Les WorkClouds ================ #
+    if st.button("Visualiser les WordClouds"):
         st.header("Principaux Mots clés d'une offre d'emploi")
         read_picture(width=700, image="workcloud_1", format="png")
         st.header("")
