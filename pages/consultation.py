@@ -11,7 +11,6 @@ def data():
     background_front(url="https://wallpaperaccess.com/full/1704480.jpg")
     data = columns_DataFrame(data1=features, data2=predictions)
     st.title("Consultation des données")
-    st.markdown("Les données")
     st.write(data)  
     
     if st.button("Supprimer toutes les données"):

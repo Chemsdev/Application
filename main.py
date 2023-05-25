@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from functions import send_data_to_api, create_tables, traitement_formualaire, background_front, css_page_front
+from functions import send_data_to_api, create_tables, traitement_formulaire, background_front
 
 
 
@@ -14,7 +14,8 @@ def main():
     
     # ===================== FORMULAIRE ======================== #
     st.title("Trouver l'emploie de vos rêves")
-    submitted, data = traitement_formualaire()
+    st.markdown("")
+    submitted, data = traitement_formulaire()
     if submitted:
         data["Prediction"] = "data scientist"
         st.write(data)

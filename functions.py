@@ -114,28 +114,33 @@ def css_page_front():
     """, unsafe_allow_html=True)
 
 # fonction permettent de créer l'encart pour afficher la prédiction.
-def encart_prediction(color:str, predict:str):
+def encart_prediction(tag: str):
     st.markdown("")
     box_style = f"""
-        padding: 20px;
-        width: 40px;
-        height: 40px;
-        border: 2px solid {color};
-        border-radius: 5px
+        background-color: #3F51B5;
+        width: 90px;
+        height: 30px;
+        border: 1px solid #3F51B5;
+        border-radius: 20px;
+        display: inline-flex;
+        justify-content: center;
     """
 
     text_style = f"""
-        color: {color};
-        font-size: 18px;
+        color: white;
+        font-size: 15px;
         font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
     """
 
     st.markdown(
         f'<div style="{box_style}">'
-        f'<p style="{text_style}">{predict} !</p>'
+        f'<p style="{text_style}">{tag}</p>'
         f'</div>',
         unsafe_allow_html=True
     )
+
 
 # =======================================================================================================================================>
 
@@ -152,22 +157,33 @@ def columns_DataFrame(data1, data2):
 # =======================================================================================================================================>
 
 # Fonction permettent de créer le formulaire.
-def traitement_formualaire():
+def traitement_formulaire():
     col1, col2 = st.columns(2)
-    with st.form(f"formulaire"):
+    with st.form("formulaire"):
         with col1:
             data = {
-                "schedule_type"   : st.selectbox(f'Type de contrat', options=['Full-time', 'Internship', 'Contractor', 'Part-time']),                
-                "search_term"     : st.selectbox(f"Type de job",  options=['data analyst']),        
-                "search_location" : st.selectbox(f'Localisation Travail',  options=['United States']),                                                      
+                "schedule_type"  : st.selectbox('Type de contrat', options=['Full-time', 'Internship', 'Contractor', 'Part-time']),                
+                "search_term"    : st.selectbox("Type de job", options=['data analyst']),        
+                "search_location": st.selectbox('Localisation Travail', options=['United States']),                                                      
             }
         with col2:
             data2 = {
-                "description_tokens" : st.text_input(f'Soft-Skills', key=1),        
-                "YEAR"  : st.selectbox(f'Années', options=[2022, 2023]),     
-                "MONTH" : st.selectbox(f'Mois',   options=[i+1 for i in range(12)]),
+                "YEAR":  st.selectbox('Années', options=[2022, 2023]),     
+                "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),
+                "description_tokens": st.multiselect('Soft-Skills', ['Python', 'JavaScript', 'Java', 'C++', 'C#', 
+                                                                      'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'TypeScript', 
+                                                                      'Kotlin', 'Perl', 'Objective-C', 'Scala', 'Haskell', 
+                                                                      'Lua', 'Shell', 'HTML', 'CSS', 'SQL', 'Symfony', 'React', 
+                                                                      "Laravel", "VueJS", "django", "Flask"
+                                                                    ])
             }
-        submitted = st.form_submit_button("Envoyer")    
+            
+        description_tokens = [f"{i}" for i in data2["description_tokens"]]
+        st.write(description_tokens)
+        data2["description_tokens"] =  ', '.join(description_tokens)
+        
+        submitted = st.form_submit_button("Envoyer")  
+           
     data.update(data2)
     return submitted, data
 
