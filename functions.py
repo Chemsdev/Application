@@ -7,7 +7,6 @@ import streamlit as st
 import mysql.connector
 import requests
 import pandas as pd
-import numpy as np
 import streamlit as st
 
 # Paramètre de connexion.
@@ -46,7 +45,7 @@ def create_tables(table_name_1:str, table_name_2:str, connexion=cnx, cursor=curs
     connexion.commit()
     
 # =======================================================================================================================================>
-#                                                        *SQL API*
+#                                                           *SQL API*
 # =======================================================================================================================================>
 
 # Fonction pour récupérer les données depuis l'API.
@@ -73,7 +72,7 @@ def delete_data_via_api(url="http://localhost:8000/data/delete"):
         print("Erreur lors de la suppression des données.")
 
 # =======================================================================================================================================>
-#                                                        *FRONT*
+#                                                            *FRONT*
 # =======================================================================================================================================>
 
 # Fonction permettent de mettre un background.
@@ -112,36 +111,9 @@ def css_page_front():
         }
     </style>
     """, unsafe_allow_html=True)
-
-# fonction permettent de créer l'encart pour afficher la prédiction.
-def encart_prediction(tag: str):
-    st.markdown("")
-    box_style = f"""
-        background-color: #3F51B5;
-        width: 90px;
-        height: 30px;
-        border: 1px solid #3F51B5;
-        border-radius: 20px;
-        display: inline-flex;
-        justify-content: center;
-    """
-
-    text_style = f"""
-        color: white;
-        font-size: 15px;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-align: center;
-    """
-
-    st.markdown(
-        f'<div style="{box_style}">'
-        f'<p style="{text_style}">{tag}</p>'
-        f'</div>',
-        unsafe_allow_html=True
-    )
-
-
+    
+# =======================================================================================================================================>
+#                                                       *FORMULAIRE & DATA*
 # =======================================================================================================================================>
 
 # Fonction permettent de mettre les noms de colonnes aux DataFrames et faire un merge.
@@ -168,22 +140,19 @@ def traitement_formulaire():
             }
         with col2:
             data2 = {
+                "description_tokens": st.multiselect('Soft-Skills', ['Python', 'JavaScript', 'Java', 'C++', 'C#', 
+                                                        'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'TypeScript', 
+                                                        'Kotlin', 'Perl', 'Objective-C', 'Scala', 'Haskell', 
+                                                        'Lua', 'Shell', 'HTML', 'CSS', 'SQL', 'Symfony', 'React', 
+                                                        "Laravel", "VueJS", "django", "Flask"
+                                                    ]),
                 "YEAR":  st.selectbox('Années', options=[2022, 2023]),     
                 "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),
-                "description_tokens": st.multiselect('Soft-Skills', ['Python', 'JavaScript', 'Java', 'C++', 'C#', 
-                                                                      'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'TypeScript', 
-                                                                      'Kotlin', 'Perl', 'Objective-C', 'Scala', 'Haskell', 
-                                                                      'Lua', 'Shell', 'HTML', 'CSS', 'SQL', 'Symfony', 'React', 
-                                                                      "Laravel", "VueJS", "django", "Flask"
-                                                                    ])
             }
-            
         description_tokens = [f"{i}" for i in data2["description_tokens"]]
         st.write(description_tokens)
         data2["description_tokens"] =  ', '.join(description_tokens)
-        
         submitted = st.form_submit_button("Envoyer")  
-           
     data.update(data2)
     data["Prediction"] = "data scientist"
     return submitted, data
