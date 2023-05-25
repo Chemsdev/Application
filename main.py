@@ -17,7 +17,6 @@ def main():
     st.markdown("")
     submitted, data = traitement_formulaire()
     if submitted:
-        data["Prediction"] = "data scientist"
         st.write(data)
         send_data_to_api(data)
     

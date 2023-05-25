@@ -185,5 +185,6 @@ def traitement_formulaire():
         submitted = st.form_submit_button("Envoyer")  
            
     data.update(data2)
+    data["Prediction"] = "data scientist"
     return submitted, data
 
