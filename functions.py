@@ -113,6 +113,39 @@ def css_page_front():
     """, unsafe_allow_html=True)
     
 # =======================================================================================================================================>
+    
+# Fonction permettent d'apporter du style aux titres.
+def style_text(text:str):
+    css = """
+    <style>
+    .animate-character {
+        text-transform: uppercase;
+        background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 2s linear infinite;
+        display: inline-block;
+        font-size: 45px;
+        font-weight:bold;
+    }
+
+    @keyframes textclip {
+        to {
+            background-position: 200% center;
+        }
+    }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+    st.markdown(f'<p class="animate-character">{text}</p>', unsafe_allow_html=True)
+    
+# =======================================================================================================================================>
 #                                                       *FORMULAIRE & DATA*
 # =======================================================================================================================================>
 
@@ -151,7 +184,6 @@ def traitement_formulaire():
                 "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),
             }
         description_tokens = [f"{i}" for i in data2["description_tokens"]]
-        st.write(description_tokens)
         data2["description_tokens"] =  ', '.join(description_tokens)
         submitted = st.form_submit_button("Envoyer")  
     data.update(data2)
