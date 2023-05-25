@@ -8,6 +8,7 @@ import mysql.connector
 import requests
 import pandas as pd
 import streamlit as st
+from PIL import Image
 
 # Paramètre de connexion.
 cnx = mysql.connector.connect(
@@ -52,7 +53,8 @@ def create_tables(table_name_1:str, table_name_2:str, connexion=cnx, cursor=curs
 def send_data_to_api(data:dict, url="http://localhost:8000/data/post"):
     response = requests.post(url, json=data)
     if response.status_code == 200:
-        return st.success("Données insérées avec succès.")
+        return 
+    # st.success("Données insérées avec succès.")
     return st.error("Erreur lors de l'insertion des données.")
 
 # Fonction pour afficher les données depuis l'API.
@@ -146,7 +148,7 @@ def style_text(text:str):
     st.markdown(f'<p class="animate-character">{text}</p>', unsafe_allow_html=True)
     
 # =======================================================================================================================================>
-#                                                       *FORMULAIRE & DATA*
+#                                                       *FORMULAIRE & AUTRES*
 # =======================================================================================================================================>
 
 # Fonction permettent de mettre les noms de colonnes aux DataFrames et faire un merge.
@@ -190,3 +192,9 @@ def traitement_formulaire():
     data["Prediction"] = "data scientist"
     return submitted, data
 
+# =======================================================================================================================================>
+
+# Fonction permettent de lire les images.
+def read_picture(width:int, image:str, format:str):
+    image = Image.open(f'images/{image}.{format}')
+    return st.image(image, width=width)

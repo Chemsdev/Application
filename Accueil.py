@@ -1,13 +1,15 @@
 import streamlit as st
-from PIL import Image
-from functions import background_front, style_text, css_page_front
+from functions import background_front, style_text, css_page_front, read_picture
 
 
 def accueil():
+    
+    # ===================== FRONT ======================== #
     background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
     style_text(text="Trouver un job dans la data ?")
     css_page_front()
     
+    # ===================== PAGE ========================= #
     st.markdown("""
         Notre entreprise se concentre sur l'accompagnement des personnes à la recherche d'un emploi en leur offrant une solution personnalisée. 
         Nous comprenons que trouver un emploi correspondant à ses compétences et à ses préférences peut être un défi, 
@@ -25,15 +27,21 @@ def accueil():
         Le poste idéal correspondant à leurs compétences et à leurs aspirations professionnelles.           
     """)
     
+    # =================== LES IMAGES =================== #
     col1, col2, col3 = st.columns(3)
     with col1:
-        image = Image.open('images/image1.jpg')
-        st.image(image, width=250)
+        st.header("")
+        read_picture(width=220, image="test3", format="png")
     with col2:
-        image = Image.open('images/image2.png')
-        st.image(image, width=250)
+        st.header("")
+        read_picture(width=200, image="test2", format="png")
     with col3:
-        image = Image.open('images/image3.jpg')
-        st.image(image, width=250)
+        st.header("")
+        read_picture(width=220, image="test", format="png")
+    if st.button("Visualiser les WorkClouds"):
+        style_text(text="Mots clés d'une offre d'emploi")
+        read_picture(width=700, image="workcloud_1", format="png")
+        style_text(text="Outils du Data Analyst")
+        read_picture(width=700, image="workcloud_2", format="png")
         
 accueil()
