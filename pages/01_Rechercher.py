@@ -4,7 +4,7 @@ from functions import send_data_to_api, create_tables, traitement_formulaire, ba
 
 
 
-def main():
+def rechercher():
     
     # ======================= FRONT =========================== #
     background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
@@ -20,7 +20,7 @@ def main():
     if submitted:
         send_data_to_api(data)
     
-main()
+rechercher()
 
 
 

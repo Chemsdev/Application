@@ -2,7 +2,7 @@ import streamlit as st
 from functions import background_front, style_text, css_page_front, read_picture
 
 
-def accueil():
+def main():
     
     # ===================== FRONT ======================== #
     background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
@@ -43,7 +43,8 @@ def accueil():
     if st.button("Visualiser les WorkClouds"):
         st.header("Principaux Mots clés d'une offre d'emploi")
         read_picture(width=700, image="workcloud_1", format="png")
+        st.header("")
         st.header("Principaux outils du Data Analyst")
         read_picture(width=700, image="workcloud_2", format="png")
         
-accueil()
+main()
