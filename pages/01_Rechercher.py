@@ -10,10 +10,7 @@ def rechercher():
     # ======================= FRONT =========================== #
     background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
     css_page_front()
-    
-    # ======================== SQL ============================ #
-    create_tables(table_name_1="features", table_name_2="predictions")
-    
+        
     # ===================== FORMULAIRE ======================== #
     style_text(title="Trouve l'emploi de tes rêves", size=45)
     st.markdown("")
@@ -33,7 +30,7 @@ def rechercher():
             padding='20px', 
             texte_css='font-size: 18px; text-align: center;'
         )
-        
+
 rechercher()
 
 
