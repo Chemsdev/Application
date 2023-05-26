@@ -46,5 +46,6 @@ def main():
         st.header("")
         st.header("Principaux outils du Data Analyst")
         read_picture(width=700, image="workcloud_2", format="png")
-        
+
+       
 main()
