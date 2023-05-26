@@ -6,7 +6,7 @@ def main():
     
     # ===================== FRONT ======================== #
     background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
-    style_text(text="Trouver un job dans la data ?")
+    style_text(title="Trouver un job dans la data ?", size=45)
     css_page_front()
     
     # ===================== PAGE ========================= #

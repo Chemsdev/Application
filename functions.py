@@ -33,8 +33,8 @@ def create_tables(table_name_1:str, table_name_2:str, connexion=cnx, cursor=curs
     search_term TEXT,
     search_location TEXT,
     description_tokens TEXT,
-    YEAR  INTEGER,
-    MONTH INTEGER)
+    YEAR  TEXT,
+    MONTH TEXT)
     ''')
     print(f"Table '{table_name_1}' créée avec succès.")    
     cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name_2}
@@ -77,6 +77,22 @@ def delete_data_via_api(url="http://localhost:8000/data/delete"):
 #                                                            *FRONT*
 # =======================================================================================================================================>
 
+# Fonction permettent de créer un encadrer pour la prédiction.
+def encadrer_texte_css(texte, couleur_bordure='#000000', epaisseur_bordure='1px', 
+                       couleur_fond='transparent', padding='10px', texte_css=''):
+    style = f'''
+        border: {epaisseur_bordure} solid {couleur_bordure};
+        background-color: {couleur_fond};
+        padding: {padding};
+        border-radius:40px
+        {texte_css}
+    '''
+
+    encadrement = f'<div style="{style}">{texte}</div>'
+    st.markdown(encadrement, unsafe_allow_html=True)
+    
+# =======================================================================================================================================>
+
 # Fonction permettent de mettre un background.
 def background_front(url:str):
     st.markdown(
@@ -117,48 +133,50 @@ def css_page_front():
 # =======================================================================================================================================>
     
 # Fonction permettent d'apporter du style aux titres.
-def style_text(text:str):
-    css = """
-    <style>
-    .animate-character {
-        text-transform: uppercase;
-        background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
-        background-size: auto auto;
-        background-clip: border-box;
-        background-size: 200% auto;
-        color: #fff;
-        background-clip: text;
-        text-fill-color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: textclip 2s linear infinite;
-        display: inline-block;
-        font-size: 45px;
-        font-weight:bold;
-    }
+def style_text(title:str, size):
+    css = f"""
+        <style>
+        .animate-character {{
+            text-transform: uppercase;
+            background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+            background-size: auto auto;
+            background-clip: border-box;
+            background-size: 200% auto;
+            color: #fff;
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textclip 2s linear infinite;
+            display: inline-block;
+            font-size: {size}px;
+            font-weight:bold;
+        }}
 
-    @keyframes textclip {
-        to {
-            background-position: 200% center;
-        }
-    }
-    </style>
-    """
+        @keyframes textclip {{
+            to {{
+                background-position: 200% center;
+            }}
+        }}
+        </style>
+        """
     st.markdown(css, unsafe_allow_html=True)
-    st.markdown(f'<p class="animate-character">{text}</p>', unsafe_allow_html=True)
+    st.markdown(f'<p class="animate-character">{title}</p>', unsafe_allow_html=True)
     
 # =======================================================================================================================================>
 #                                                       *FORMULAIRE & AUTRES*
 # =======================================================================================================================================>
 
 # Fonction permettent de mettre les noms de colonnes aux DataFrames et faire un merge.
-def columns_DataFrame(data1, data2):
+def columns_DataFrame(data1, data2, pred=False):
     columns_features=["id", "schedule_type", "search_term", "search_location", "description_tokens", "YEAR", "MONTH"]
     columns_prediction=["id","id_fk","y_pred"]
     features   = pd.DataFrame(data1, columns=columns_features)
     prediction = pd.DataFrame(data2, columns=columns_prediction)
     data = pd.merge(features, prediction, left_on='id', right_on='id_fk')
     data = data.drop(["id_y", "id_fk", "id_x"], axis=1)
+    if pred:
+        return data["y_pred"].iloc[-1]
     return data
 
 # =======================================================================================================================================>
@@ -182,8 +200,8 @@ def traitement_formulaire():
                                                         "Laravel", "VueJS", "django", "Flask", "Excel", "Word", 
                                                         "Tableau", "PowerBI", "Word", "PowerPoint"
                                                     ]),
-                "YEAR":  st.selectbox('Années', options=[2022, 2023]),     
-                "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),
+                "YEAR":  st.selectbox('Années', options=["2022", "2023"]),     
+                "MONTH": st.selectbox('Mois',   options=[str(i) for i in range(1, 13)]),
             }
         description_tokens = [f"{i}" for i in data2["description_tokens"]]
         data2["description_tokens"] =  ', '.join(description_tokens)
