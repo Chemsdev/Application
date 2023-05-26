@@ -84,7 +84,7 @@ def encadrer_texte_css(texte, couleur_bordure='#000000', epaisseur_bordure='1px'
         border: {epaisseur_bordure} solid {couleur_bordure};
         background-color: {couleur_fond};
         padding: {padding};
-        border-radius:40px;
+        border-radius:40px
         {texte_css}
     '''
 

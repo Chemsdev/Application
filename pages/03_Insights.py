@@ -65,3 +65,5 @@ elif graph == '3':
     fig.update_layout(
         font=dict(size=20,family="Franklin Gothic"))
     st.plotly_chart(fig)
+    
+    
