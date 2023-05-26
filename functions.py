@@ -8,6 +8,7 @@ import mysql.connector
 import requests
 import pandas as pd
 import streamlit as st
+from PIL import Image
 
 # Paramètre de connexion.
 cnx = mysql.connector.connect(
@@ -52,7 +53,8 @@ def create_tables(table_name_1:str, table_name_2:str, connexion=cnx, cursor=curs
 def send_data_to_api(data:dict, url="http://localhost:8000/data/post"):
     response = requests.post(url, json=data)
     if response.status_code == 200:
-        return st.success("Données insérées avec succès.")
+        return 
+    # st.success("Données insérées avec succès.")
     return st.error("Erreur lors de l'insertion des données.")
 
 # Fonction pour afficher les données depuis l'API.
@@ -106,14 +108,47 @@ def css_page_front():
         }
         p {
             text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-            font-size:25px;
-            # text-shadow: 1px 1px 2px pink;
+            font-size:16px;
+            font-weight:bold;
         }
     </style>
     """, unsafe_allow_html=True)
     
 # =======================================================================================================================================>
-#                                                       *FORMULAIRE & DATA*
+    
+# Fonction permettent d'apporter du style aux titres.
+def style_text(text:str):
+    css = """
+    <style>
+    .animate-character {
+        text-transform: uppercase;
+        background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 2s linear infinite;
+        display: inline-block;
+        font-size: 45px;
+        font-weight:bold;
+    }
+
+    @keyframes textclip {
+        to {
+            background-position: 200% center;
+        }
+    }
+    </style>
+    """
+    st.markdown(css, unsafe_allow_html=True)
+    st.markdown(f'<p class="animate-character">{text}</p>', unsafe_allow_html=True)
+    
+# =======================================================================================================================================>
+#                                                       *FORMULAIRE & AUTRES*
 # =======================================================================================================================================>
 
 # Fonction permettent de mettre les noms de colonnes aux DataFrames et faire un merge.
@@ -144,16 +179,24 @@ def traitement_formulaire():
                                                         'PHP', 'Ruby', 'Go', 'Swift', 'Rust', 'TypeScript', 
                                                         'Kotlin', 'Perl', 'Objective-C', 'Scala', 'Haskell', 
                                                         'Lua', 'Shell', 'HTML', 'CSS', 'SQL', 'Symfony', 'React', 
-                                                        "Laravel", "VueJS", "django", "Flask"
+                                                        "Laravel", "VueJS", "django", "Flask", "Excel", "Word", 
+                                                        "Tableau", "PowerBI", "Word", "PowerPoint"
                                                     ]),
                 "YEAR":  st.selectbox('Années', options=[2022, 2023]),     
                 "MONTH": st.selectbox('Mois', options=[i+1 for i in range(12)]),
             }
         description_tokens = [f"{i}" for i in data2["description_tokens"]]
-        st.write(description_tokens)
         data2["description_tokens"] =  ', '.join(description_tokens)
         submitted = st.form_submit_button("Envoyer")  
     data.update(data2)
     data["Prediction"] = "data scientist"
     return submitted, data
+
+# =======================================================================================================================================>
+
+# Fonction permettent de lire les images.
+def read_picture(width:int, image:str, format:str):
+    image = Image.open(f'images/{image}.{format}')
+    return st.image(image, width=width)
+
 
