@@ -30,10 +30,10 @@ def main():
     # =================  Les WorkClouds ================ #
     if st.button("Visualiser les WordClouds"):
         st.header("Principaux Mots clés d'une offre d'emploi")
-        read_picture(width=700, image="workcloud_1", format="png")
+        read_picture(width=700, image="wordcloud1", format="png")
         st.header("")
         st.header("Principaux outils du Data Analyst")
-        read_picture(width=700, image="workcloud_2", format="png")
+        read_picture(width=700, image="wordcloud2", format="png")
 
        
 main()
