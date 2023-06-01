@@ -26,18 +26,6 @@ def main():
         Nous nous engageons à simplifier le processus de recherche d'emploi en offrant une solution sur mesure pour aider nos clients à trouver 
         Le poste idéal correspondant à leurs compétences et à leurs aspirations professionnelles.           
     """)
-    
-    # =================== Les images =================== #
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.header("")
-        read_picture(width=220, image="test3", format="png")
-    with col2:
-        st.header("")
-        read_picture(width=200, image="test2", format="png")
-    with col3:
-        st.header("")
-        read_picture(width=220, image="test", format="png")
         
     # =================  Les WorkClouds ================ #
     if st.button("Visualiser les WordClouds"):

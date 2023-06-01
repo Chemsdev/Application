@@ -1,5 +1,5 @@
 import streamlit as st
-from functions import send_data_to_api, create_tables, traitement_formulaire, background_front, style_text, get_data_from_api,columns_DataFrame
+from functions import send_data_to_api, traitement_formulaire, background_front, style_text, get_data_from_api,columns_DataFrame
 from functions import css_page_front, encadrer_texte_css
 
 
