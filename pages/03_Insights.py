@@ -35,7 +35,7 @@ if graph == '1':
     st.plotly_chart(fig)
     
 elif graph == '2':
-    style_text(title='Top 10 Compagnies', size=30)
+    style_text(title='Top 10 des compagnies', size=30)
     top10_comp_location = df['company_name'].value_counts()[:10]
     fig = px.bar(y=top10_comp_location.values, 
                  x=top10_comp_location.index, 
