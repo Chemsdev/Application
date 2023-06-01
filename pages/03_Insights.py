@@ -9,12 +9,11 @@ from functions import background_front, style_text
 
 
 
-# DATASET ==============================================================
+# IMPORT DATASET ==============================================================
 background_front(url="https://nano.scrolller.com/abstract-wallpaper-9nyw4ngmg1.jpg")
 df = pd.read_csv("data/gsearch_jobs.csv")
 top_skills_df = pd.read_csv("data/top_skills_df.csv")
-
-
+# =============================================================================>
 graph = st.sidebar.radio(label='Pages graphs', options=('1', '2', '3', '4'))
 
 if graph == '1':
@@ -35,7 +34,7 @@ if graph == '1':
     )
 
     st.plotly_chart(fig)
-    
+# =============================================================================>   
 elif graph == '2':
     style_text(title='Top 10 des compagnies', size=30)
     top10_comp_location = df['company_name'].value_counts()[:10]
@@ -50,8 +49,7 @@ elif graph == '2':
         yaxis_title="count",
         font = dict(size=12,family="Franklin Gothic"))
     st.plotly_chart(fig)
-
-    
+# =============================================================================>    
 elif graph == '3':
     style_text(title='Distribution horaires', size=30)
     work_h = df['schedule_type'].value_counts()
@@ -67,7 +65,7 @@ elif graph == '3':
     fig.update_layout(
         font=dict(size=20,family="Franklin Gothic"))
     st.plotly_chart(fig)
-    
+# =============================================================================> 
 elif graph == '4':
     st.title('Top 10 Compétences')
     
@@ -85,5 +83,4 @@ elif graph == '4':
 
     # Render the plotly figure using Streamlit
     st.plotly_chart(fig)
-    
-    
+# =============================================================================>
