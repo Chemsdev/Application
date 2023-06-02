@@ -21,12 +21,6 @@ def main():
         Le type de contrat qu'ils recherchent, la localisation souhaitée et le poste visé, entre autres informations pertinentes. 
         En remplissant ce formulaire, nos clients peuvent obtenir une fiche de poste appropriée à leurs besoins spécifiques.      
     """)
-    
-    st.markdown("""
-        Nous nous engageons à simplifier le processus de recherche d'emploi en offrant une solution sur mesure pour aider nos clients à trouver 
-        Le poste idéal correspondant à leurs compétences et à leurs aspirations professionnelles.           
-    """)
-        
     # =================  Les WorkClouds ================ #
     if st.button("Visualiser les WordClouds"):
         st.header("Principaux Mots clés d'une offre d'emploi")
