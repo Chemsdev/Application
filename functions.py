@@ -18,8 +18,6 @@ def send_data_to_api(data:dict, url="http://nlpindiselchems.azurewebsites.net/da
     response = requests.post(url, json=data)
     if response.status_code == 200:
         return 
-    # st.success("Données insérées avec succès.")
-    return st.error("Erreur lors de l'insertion des données.")
 
 # Fonction pour afficher les données depuis l'API.
 def get_data_from_api(url="http://nlpindiselchems.azurewebsites.net/data/get"):
@@ -27,7 +25,6 @@ def get_data_from_api(url="http://nlpindiselchems.azurewebsites.net/data/get"):
     if response.status_code == 200:
         data = response.json().get("data")
         return data
-    return st.error("Erreur lors de la récupération des données.")
 
 # Fonction pour supprimer les données via l'API.
 def delete_data_via_api(url="http://nlpindiselchems.azurewebsites.net/data/delete"):
