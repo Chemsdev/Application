@@ -14,7 +14,7 @@ from PIL import Image
 # =======================================================================================================================================>
 
 # Fonction pour récupérer les données depuis l'API.
-def send_data_to_api(data:dict, url="http://localhost:8000/data/post"):
+def send_data_to_api(data:dict, url="http://nlpindiselchems.azurewebsites.net/data/post"):
     response = requests.post(url, json=data)
     if response.status_code == 200:
         return 
@@ -22,7 +22,7 @@ def send_data_to_api(data:dict, url="http://localhost:8000/data/post"):
     return st.error("Erreur lors de l'insertion des données.")
 
 # Fonction pour afficher les données depuis l'API.
-def get_data_from_api(url="http://localhost:8000/data/get"):
+def get_data_from_api(url="http://nlpindiselchems.azurewebsites.net/data/get"):
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json().get("data")
@@ -30,7 +30,7 @@ def get_data_from_api(url="http://localhost:8000/data/get"):
     return st.error("Erreur lors de la récupération des données.")
 
 # Fonction pour supprimer les données via l'API.
-def delete_data_via_api(url="http://localhost:8000/data/delete"):
+def delete_data_via_api(url="http://nlpindiselchems.azurewebsites.net/data/delete"):
     response = requests.delete(url)
     if response.status_code == 200:
         print("Les données ont été supprimées avec succès.")
